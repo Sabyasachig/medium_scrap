@@ -7,12 +7,20 @@ possible hyperlinks that belong to medium.com and store them in a database of yo
 
 clone the project run the below command
 
-
 ```bash
 use ruby 2.7
 sqlite DB has been used
 $ gem install nokogiri
 $ ruby scrap_medium_url.rb // to run ruby program
 ```
-use sqlite editor to view the data
-or use https://sqliteonline.com/
+
+## Configurations
+```bash
+@@sleep_timer = 2 # value*60 seconds
+@@max_url = 10 #max number of urls , put a higher value in you want to scrap more
+@retry_counter = 0 # currently only one retry
+```
+
+use sqlite editor to view the data which will be generated
+as user_list.db
+or use https://sqliteonline.com/ 
