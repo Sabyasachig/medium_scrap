@@ -1,7 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
 require 'net/http'
-require 'thwait'
 require './db_helper.rb'
 
 class ScrapMediumURL
@@ -14,6 +13,7 @@ class ScrapMediumURL
     @@url_hash = {'https://medium.com' => true}.transform_keys(&:to_sym)
     @@sleep_timer = 2
     @@max_url = 10 #limit the number of urls else the program will run for ever
+    @retry_counter = 0
   end
 
   #main method to generate all the urls
@@ -36,6 +36,11 @@ class ScrapMediumURL
       end
     rescue Exception => e
       puts "Exception occurred In Thread #{e.message}"
+      unless @@retry_counter != 0
+        puts "Retrying ....."
+        @@retry_counter = 1
+        retry
+      end
     end
   end
 
@@ -73,6 +78,7 @@ class ScrapMediumURL
           url_list = url_list.map { |url| url if get_host_without_www(url) == 'medium.com' }.compact
           save_data(url_list)
           new_urls_to_scrap = update_url_hash(url_list).compact
+          @@retry_counter = 0 #setting the value for every new request
           generate_thread(new_urls_to_scrap)
         end
       end
