@@ -18,7 +18,7 @@ $ ruby scrap_medium_url.rb // to run ruby program
 ```bash
 @@sleep_timer = 2 # value*60 seconds
 @@max_url = 10 #max number of urls , put a higher value in you want to scrap more
-@retry_counter = 0 # currently only one retry
+@@retry_counter = 0 # currently only one retry
 ```
 
 use sqlite editor to view the data which will be generated

@@ -13,7 +13,7 @@ class ScrapMediumURL
     @@url_hash = {'https://medium.com' => true}.transform_keys(&:to_sym)
     @@sleep_timer = 2
     @@max_url = 10 #limit the number of urls else the program will run for ever
-    @retry_counter = 0
+    @@retry_counter = 0
   end
 
   #main method to generate all the urls
